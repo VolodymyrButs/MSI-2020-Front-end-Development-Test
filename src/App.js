@@ -27,6 +27,7 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     background-color: #f8f8f8;
+    overflow: hidden;
 `
 
 const PageContent = styled.div`
@@ -34,6 +35,7 @@ const PageContent = styled.div`
     min-width: 100%;
     max-width: 1440px;
     background-color: #fff;
+    overflow: hidden;
 `
 const MainContainer = styled.div`
     width: 66.6%;
@@ -148,22 +150,23 @@ const FavList = styled.aside`
     height: 100%;
     background: #f8f8f8;
     box-sizing: border-box;
-    padding: 88px 40px;
+    padding: 40px;
     @media (max-width: ${display.tablet}px) {
         width: 60%;
         position: absolute;
         top: 0;
         right: 0;
         overflow: scroll;
+        padding: 88px 20px;
     }
     @media (max-width: ${display.mobile}px) {
         width: 100%;
-        padding: 88px 20px;
     }
 `
 const FavListWrapper = styled.div`
     width: 33.41%;
     @media (max-width: ${display.tablet}px) {
+        overflow: none;
         display: ${(props) => (props.open ? 'block' : 'none')};
         width: 100%;
         min-height: 100%;
@@ -304,6 +307,11 @@ const App = () => {
             getRandomJoke()
         }
     }
+
+    useEffect(() => {
+        isFavOpen && (document.body.style.overflow = 'hidden')
+        !isFavOpen && (document.body.style.overflow = 'unset')
+    }, [isFavOpen])
     return (
         <Wrapper>
             <PageContent>
