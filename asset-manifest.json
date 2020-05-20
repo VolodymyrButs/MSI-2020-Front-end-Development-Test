@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/MSI-2020-Front-end-Development-Test/static/css/main.62616655.chunk.css",
-    "main.js": "/MSI-2020-Front-end-Development-Test/static/js/main.afb134fa.chunk.js",
-    "main.js.map": "/MSI-2020-Front-end-Development-Test/static/js/main.afb134fa.chunk.js.map",
+    "main.css": "/MSI-2020-Front-end-Development-Test/static/css/main.7ffaeff8.chunk.css",
+    "main.js": "/MSI-2020-Front-end-Development-Test/static/js/main.afc769cf.chunk.js",
+    "main.js.map": "/MSI-2020-Front-end-Development-Test/static/js/main.afc769cf.chunk.js.map",
     "runtime-main.js": "/MSI-2020-Front-end-Development-Test/static/js/runtime-main.c8d00197.js",
     "runtime-main.js.map": "/MSI-2020-Front-end-Development-Test/static/js/runtime-main.c8d00197.js.map",
     "static/js/2.a4a43543.chunk.js": "/MSI-2020-Front-end-Development-Test/static/js/2.a4a43543.chunk.js",
     "static/js/2.a4a43543.chunk.js.map": "/MSI-2020-Front-end-Development-Test/static/js/2.a4a43543.chunk.js.map",
     "index.html": "/MSI-2020-Front-end-Development-Test/index.html",
-    "precache-manifest.19e9686e442edbdc8455dc7e2c0a6d1f.js": "/MSI-2020-Front-end-Development-Test/precache-manifest.19e9686e442edbdc8455dc7e2c0a6d1f.js",
+    "precache-manifest.9d5f53e5744b40afa714b4ada11a50cb.js": "/MSI-2020-Front-end-Development-Test/precache-manifest.9d5f53e5744b40afa714b4ada11a50cb.js",
     "service-worker.js": "/MSI-2020-Front-end-Development-Test/service-worker.js",
-    "static/css/main.62616655.chunk.css.map": "/MSI-2020-Front-end-Development-Test/static/css/main.62616655.chunk.css.map",
+    "static/css/main.7ffaeff8.chunk.css.map": "/MSI-2020-Front-end-Development-Test/static/css/main.7ffaeff8.chunk.css.map",
     "static/js/2.a4a43543.chunk.js.LICENSE.txt": "/MSI-2020-Front-end-Development-Test/static/js/2.a4a43543.chunk.js.LICENSE.txt",
     "static/media/heart.679d6e7b.svg": "/MSI-2020-Front-end-Development-Test/static/media/heart.679d6e7b.svg",
     "static/media/link.f8a998d1.svg": "/MSI-2020-Front-end-Development-Test/static/media/link.f8a998d1.svg",
@@ -19,7 +19,7 @@
   "entrypoints": [
     "static/js/runtime-main.c8d00197.js",
     "static/js/2.a4a43543.chunk.js",
-    "static/css/main.62616655.chunk.css",
-    "static/js/main.afb134fa.chunk.js"
+    "static/css/main.7ffaeff8.chunk.css",
+    "static/js/main.afc769cf.chunk.js"
   ]
 }
