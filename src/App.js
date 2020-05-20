@@ -145,25 +145,28 @@ const GetJoke = styled.button`
 `
 const FavList = styled.aside`
     width: 100%;
+    height: 100%;
+    background: #f8f8f8;
+    box-sizing: border-box;
+    padding: 88px 40px;
     @media (max-width: ${display.tablet}px) {
         width: 60%;
         position: absolute;
         top: 0;
         right: 0;
+        overflow: scroll;
     }
     @media (max-width: ${display.mobile}px) {
         width: 100%;
+        padding: 88px 20px;
     }
-    min-height: 100%;
-    background: #f8f8f8;
-    box-sizing: border-box;
-    padding: 88px 40px;
 `
 const FavListWrapper = styled.div`
     width: 33.41%;
     @media (max-width: ${display.tablet}px) {
         display: ${(props) => (props.open ? 'block' : 'none')};
         width: 100%;
+        min-height: 100%;
         position: absolute;
         top: 0;
         bottom: 0;
@@ -216,6 +219,10 @@ const FavButtonWrapper = styled.div`
         top: 40px;
         right: 40px;
     }
+    @media (max-width: ${display.mobile}px) {
+        top: 20px;
+        right: 20px;
+    }
 `
 const FavouriteTitle = styled.label`
     font-family: Roboto;
@@ -235,7 +242,7 @@ const App = () => {
     const [inputValue, setInputValue] = useState()
     const [radioValue, setRadioValue] = useState()
     const [isFavOpen, setIsFavOpen] = useState(false)
-    console.log(isFavOpen)
+
     const [state, dispatch] = useReducer(reducer, loadState())
     useEffect(() => {
         saveState(state)
@@ -276,6 +283,9 @@ const App = () => {
             })
             .then((data) => {
                 setJoke(data.result)
+            })
+            .catch((err) => {
+                console.log('lala', err.message)
             })
 
     const handleSelectCategory = (e) => {

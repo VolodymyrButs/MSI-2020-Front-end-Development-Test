@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { ReactComponent as Heart } from '../assets/heart.svg'
 import { ReactComponent as Message } from '../assets/message.svg'
 import { ReactComponent as Link } from '../assets/link.svg'
+import { display } from '../constant'
 
 const JokeWrapper = styled.div`
     position: relative;
@@ -14,6 +15,10 @@ const JokeWrapper = styled.div`
     padding: ${(props) =>
         props.fav ? '47px 20px 20px 80px' : '67px 40px 45px 100px'};
     margin: 10px 0px;
+    @media (max-width: ${display.mobile}px) {
+        padding: ${(props) =>
+            props.fav ? '47px 20px 20px 60px' : '67px 40px 45px 80px'};
+    }
 `
 
 const HeartStyled = styled(Heart)`
@@ -28,6 +33,9 @@ const MessageIconWrapper = styled.div`
     position: absolute;
     left: ${(props) => (props.fav ? '20px' : '40px')};
     top: ${(props) => (props.fav ? '47px' : '67px')};
+    @media (max-width: ${display.mobile}px) {
+        left: ${(props) => (props.fav ? '10px' : '20px')};
+    }
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -95,7 +103,6 @@ export const JokeComponent = ({ item, isfavorite, dispatch, small }) => {
     const addToState = (item) => {
         dispatch({ type: 'ADD_FAV', item })
     }
-    console.log(item.updated_at)
     return (
         <JokeWrapper fav={small ? 1 : 0}>
             <JokeId>
