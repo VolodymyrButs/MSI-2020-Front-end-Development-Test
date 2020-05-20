@@ -23,7 +23,7 @@ const isActive = {
     `,
 }
 const Wrapper = styled.div`
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: center;
     background-color: #f8f8f8;
@@ -31,18 +31,22 @@ const Wrapper = styled.div`
 
 const PageContent = styled.div`
     display: flex;
-    min-width: 100vw;
+    min-width: 100%;
     max-width: 1440px;
     background-color: #fff;
 `
 const MainContainer = styled.div`
     width: 66.6%;
-    min-height: 100vh;
+    min-height: 100%;
     padding: 40px 140px 140px 140px;
     box-sizing: border-box;
     @media (max-width: ${display.tablet}px) {
         width: 100%;
         padding: 40px;
+    }
+    @media (max-width: ${display.mobile}px) {
+        width: 100%;
+        padding: 20px;
     }
 `
 const JokeSelector = styled.div``
@@ -81,6 +85,9 @@ const RadioItem = styled.div`
     input {
         width: 20px;
         height: 20px;
+        :focus {
+            outline: none;
+        }
     }
     label {
         font-family: Roboto;
@@ -132,22 +139,22 @@ const GetJoke = styled.button`
     font-size: 16px;
     line-height: 22px;
     color: #ffffff;
+    :focus {
+        outline: none;
+    }
 `
 const FavList = styled.aside`
     width: 100%;
     @media (max-width: ${display.tablet}px) {
-        width: 50%;
+        width: 60%;
         position: absolute;
         top: 0;
         right: 0;
     }
     @media (max-width: ${display.mobile}px) {
         width: 100%;
-        position: absolute;
-        top: 0;
-        right: 0;
     }
-    min-height: 100vh;
+    min-height: 100%;
     background: #f8f8f8;
     box-sizing: border-box;
     padding: 88px 40px;
@@ -173,6 +180,9 @@ const FavButton = styled.button`
     border: 0;
     margin-right: 10px;
     padding: 0;
+    :focus {
+        outline: none;
+    }
     &::before {
         display: block;
         content: '';
@@ -198,14 +208,14 @@ const FavButton = styled.button`
     }
 `
 const FavButtonWrapper = styled.div`
-    @media (min-width: ${display.tablet}px) {
-        display: none;
+    display: none;
+    @media (max-width: ${display.tablet}px) {
+        z-index: 2;
+        display: flex;
+        position: absolute;
+        top: 40px;
+        right: 40px;
     }
-    z-index: 2;
-    display: flex;
-    position: absolute;
-    top: 40px;
-    right: 40px;
 `
 const FavouriteTitle = styled.label`
     font-family: Roboto;
