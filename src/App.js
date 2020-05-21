@@ -1,27 +1,15 @@
 import React, { useEffect, useState, useReducer } from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
-import { saveState, loadState } from './components/localStorage'
-import { JokeComponent } from './components/JokeComponent'
-import { reducer } from './components/reducer'
+import { saveFavorite, loadFavorite } from './jokes/favoriteStorage'
+import { Joke } from './jokes/Joke'
+import { favoriteJokesReducer } from './jokes/favoriteJokesReducer'
 import { display } from './constant'
+import { Category } from './jokes/category'
+import { FavList } from './jokes/favList'
+import { ToggleFav } from './jokes/toggleFav'
+import { shuffle } from './shuffle'
 
-const isActive = {
-    true: css`
-        color: #333333;
-        background: #f8f8f8;
-        border: 2px solid #f8f8f8;
-        box-sizing: border-box;
-        border-radius: 6px;
-    `,
-    false: css`
-        color: #ababab;
-        background: transparent;
-        border: 2px solid #f8f8f8;
-        box-sizing: border-box;
-        border-radius: 6px;
-    `,
-}
 const Wrapper = styled.div`
     width: 100%;
     display: flex;
@@ -81,7 +69,7 @@ const HelloBlock = styled.div`
     }
 `
 
-const RadioItem = styled.div`
+const RadioItem = styled.label`
     display: flex;
     margin: 10px 0;
     input {
@@ -101,20 +89,7 @@ const RadioItem = styled.div`
         padding-left: 15px;
     }
 `
-const CategoriesButton = styled.button`
-    margin: 2px 5px;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 16px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    :focus {
-        outline: none;
-    }
-    ${(props) => isActive[props.active]}
-`
+
 const TextInput = styled.input`
     width: 100%;
     border: 2px solid #333333;
@@ -126,7 +101,10 @@ const TextInput = styled.input`
     font-weight: normal;
     font-size: 16px;
     line-height: 22px;
-    color: #ababab;
+    color: #ffa28d;
+    :valid {
+        color: #ababab;
+    }
 `
 const GetJoke = styled.button`
     width: 152px;
@@ -140,150 +118,50 @@ const GetJoke = styled.button`
     font-weight: bold;
     font-size: 16px;
     line-height: 22px;
-    color: #ffffff;
+    color: ${(props) => (props.color ? 'red' : '#f8f8f8')};
     :focus {
         outline: none;
     }
-`
-const FavList = styled.aside`
-    width: 100%;
-    height: 100%;
-    background: #f8f8f8;
-    box-sizing: border-box;
-    padding: 40px;
-    @media (max-width: ${display.tablet}px) {
-        width: 60%;
-        position: absolute;
-        top: 0;
-        right: 0;
-        overflow: scroll;
-        padding: 88px 20px;
-    }
-    @media (max-width: ${display.mobile}px) {
-        width: 100%;
-    }
-`
-const FavListWrapper = styled.div`
-    width: 33.41%;
-    @media (max-width: ${display.tablet}px) {
-        overflow: none;
-        display: ${(props) => (props.open ? 'block' : 'none')};
-        width: 100%;
-        min-height: 100%;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: rgba(0, 0, 0, 0.3);
-    }
-`
-const FavButton = styled.button`
-    height: 28px;
-    width: 28px;
-    background: #333;
-    border-radius: 50%;
-    border: 0;
-    margin-right: 10px;
-    padding: 0;
-    :focus {
-        outline: none;
-    }
-    &::before {
-        display: block;
-        content: '';
-        position: absolute;
-        top: ${(props) => (props.open ? '13px' : '10px')};
-        width: 14px;
-        height: 2px;
-        background-color: #fff;
-        transform: translate(50%)
-            rotate(${(props) => (props.open ? '-45deg' : '0')});
-    }
-    &::after {
-        display: block;
-        content: '';
-        position: absolute;
-        top: ${(props) => (props.open ? '13px' : '16px')};
-        width: 14px;
-        height: 2px;
-        background-color: #fff;
-
-        transform: translate(50%)
-            rotate(${(props) => (props.open ? '45deg' : '0')});
-    }
-`
-const FavButtonWrapper = styled.div`
-    display: none;
-    @media (max-width: ${display.tablet}px) {
-        z-index: 2;
-        display: flex;
-        position: absolute;
-        top: 40px;
-        right: 40px;
-    }
-    @media (max-width: ${display.mobile}px) {
-        top: 20px;
-        right: 20px;
-    }
-`
-const FavouriteTitle = styled.label`
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 28px;
-    color: #ababab;
-    margin: 0;
-    margin-bottom: 20px;
 `
 
 const App = () => {
     const [joke, setJoke] = useState()
-    const [categoriesArray, setCategoriesArray] = useState([])
     const [selectedCategory, setSelectedCategory] = useState()
-    const [inputValue, setInputValue] = useState()
+    const [inputValue, setInputValue] = useState('')
     const [radioValue, setRadioValue] = useState()
     const [isFavOpen, setIsFavOpen] = useState(false)
+    const [wrongValue, setWrongValue] = useState('')
 
-    const [state, dispatch] = useReducer(reducer, loadState())
     useEffect(() => {
-        saveState(state)
-    }, [state])
-    useEffect(() => {
-        loadState()
-        fetch(' https://api.chucknorris.io/jokes/categories')
-            .then((response) => {
-                return response.json()
-            })
-            .then((data) => {
-                setCategoriesArray(data)
-            })
+        loadFavorite()
     }, [])
+    const [favoriteJokes, dispatch] = useReducer(
+        favoriteJokesReducer,
+        loadFavorite()
+    )
+    useEffect(() => {
+        saveFavorite(favoriteJokes)
+    }, [favoriteJokes])
+
     const getRandomJoke = () =>
         fetch('https://api.chucknorris.io/jokes/random')
-            .then((response) => {
-                return response.json()
-            })
+            .then((response) => response.json())
             .then((data) => {
                 setJoke([data])
             })
-    const getCategoriJoke = () =>
+    const getCategoryJoke = () =>
         fetch(
             `https://api.chucknorris.io/jokes/random?category=${selectedCategory}`
         )
-            .then((response) => {
-                return response.json()
-            })
+            .then((response) => response.json())
             .then((data) => {
+                shuffle([data])
                 setJoke([data])
             })
 
     const getTextJoke = () =>
         fetch(`https://api.chucknorris.io/jokes/search?query=${inputValue}`)
-            .then((response) => {
-                return response.json()
-            })
+            .then((response) => response.json())
             .then((data) => {
                 setJoke(data.result)
             })
@@ -291,18 +169,21 @@ const App = () => {
                 console.log('lala', err.message)
             })
 
-    const handleSelectCategory = (e) => {
-        setSelectedCategory(e.target.value)
-    }
     const handleInput = (e) => {
         setInputValue(e.target.value)
     }
 
     const getJoke = () => {
-        if (radioValue === 'categori') {
-            getCategoriJoke()
-        } else if (radioValue === 'text') {
+        if (radioValue === 'category' && selectedCategory) {
+            getCategoryJoke()
+        } else if (radioValue === 'category' && !selectedCategory) {
+            setWrongValue('Select category!')
+            setTimeout(() => setWrongValue(''), 3000)
+        } else if (radioValue === 'text' && inputValue.length >= 3) {
             getTextJoke()
+        } else if (radioValue === 'text' && inputValue.length < 3) {
+            setWrongValue('Wrong value!')
+            setTimeout(() => setWrongValue(''), 3000)
         } else {
             getRandomJoke()
         }
@@ -312,6 +193,7 @@ const App = () => {
         isFavOpen && (document.body.style.overflow = 'hidden')
         !isFavOpen && (document.body.style.overflow = 'unset')
     }, [isFavOpen])
+
     return (
         <Wrapper>
             <PageContent>
@@ -328,109 +210,77 @@ const App = () => {
                                 onChange={() => {
                                     setRadioValue('random')
                                 }}
-                                name="type"
+                                name="jokeRequestType"
                                 type="radio"
-                                id="r1"
-                            ></input>
-                            <label htmlFor="r1">Random</label>
+                            />
+                            Random
                         </RadioItem>
                         <RadioItem>
                             <input
-                                name="type"
+                                name="jokeRequestType"
                                 onChange={() => {
-                                    setRadioValue('categori')
+                                    setRadioValue('category')
                                 }}
                                 type="radio"
-                                id="r2"
-                            ></input>
-                            <label htmlFor="r2">From Categories</label>
+                            />
+                            From Categories
                         </RadioItem>
-                        {radioValue === 'categori'
-                            ? categoriesArray.map((categori, index) => {
-                                  const active = selectedCategory === categori
-                                  return (
-                                      <CategoriesButton
-                                          active={active}
-                                          onClick={handleSelectCategory}
-                                          value={categori}
-                                          key={index}
-                                      >
-                                          {categori.charAt(0).toUpperCase() +
-                                              categori.slice(1)}
-                                      </CategoriesButton>
-                                  )
-                              })
-                            : null}
-
+                        {radioValue === 'category' && (
+                            <Category
+                                selectedCategory={selectedCategory}
+                                setSelectedCategory={setSelectedCategory}
+                            />
+                        )}
                         <RadioItem>
                             <input
-                                name="type"
+                                name="jokeRequestType"
                                 onChange={() => {
                                     setRadioValue('text')
                                 }}
                                 type="radio"
-                                id="r3"
-                            ></input>
-                            <label htmlFor="r3">Search</label>
+                            />
+                            Search
                         </RadioItem>
-                        {radioValue === 'text' ? (
+                        {radioValue === 'text' && (
                             <div>
                                 <TextInput
-                                    placeholder="Free text search..."
+                                    minLength={3}
+                                    placeholder="Free text search...(min 3 symbol)"
                                     onChange={handleInput}
                                 ></TextInput>
                             </div>
-                        ) : null}
-                        <GetJoke onClick={getJoke}>Get a joke</GetJoke>
-                    </JokeSelector>
-                    {joke && (
-                        <>
-                            {joke.slice(0, 9).map((item) => {
-                                const isfavorite = state
-                                    .map((joke) => joke.id === item.id)
-                                    .includes(true)
-                                return (
-                                    <JokeComponent
-                                        key={item.id}
-                                        item={item}
-                                        isfavorite={isfavorite}
-                                        dispatch={dispatch}
-                                    />
-                                )
-                            })}
-                        </>
-                    )}
-                </MainContainer>
-                <FavButtonWrapper>
-                    <FavButton
-                        id="but"
-                        open={isFavOpen}
-                        onClick={() => {
-                            setIsFavOpen(!isFavOpen)
-                        }}
-                    />{' '}
-                    <FavouriteTitle htmlFor="but">Favourite</FavouriteTitle>
-                </FavButtonWrapper>
-                <FavListWrapper open={isFavOpen}>
-                    <FavList>
-                        {!isFavOpen ? (
-                            <FavouriteTitle>Favourite</FavouriteTitle>
-                        ) : (
-                            <FavouriteTitle>{''}</FavouriteTitle>
                         )}
-                        {state.map((item, index) => {
+
+                        <GetJoke onClick={getJoke} color={wrongValue}>
+                            {wrongValue ? `${wrongValue}` : 'Get a joke'}
+                        </GetJoke>
+                    </JokeSelector>
+                    {joke &&
+                        joke.slice(0, 9).map((item) => {
+                            console.log(inputValue)
+                            const isJokeFavorite = Boolean(
+                                favoriteJokes[item.id]
+                            )
+                                ? 'true'
+                                : ''
+
                             return (
-                                <JokeComponent
-                                    small
+                                <Joke
+                                    small={''}
                                     key={item.id}
                                     item={item}
-                                    isfavorite={true}
+                                    isJokeFavorite={isJokeFavorite}
                                     dispatch={dispatch}
                                 />
                             )
                         })}
-                    </FavList>
-                </FavListWrapper>
+                </MainContainer>
+                <ToggleFav isFavOpen={isFavOpen} setIsFavOpen={setIsFavOpen} />
+                <FavList
+                    isFavOpen={isFavOpen}
+                    favoriteJokes={favoriteJokes}
+                    dispatch={dispatch}
+                />
             </PageContent>
         </Wrapper>
     )
