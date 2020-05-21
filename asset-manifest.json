@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/MSI-2020-Front-end-Development-Test/static/css/main.7ffaeff8.chunk.css",
-    "main.js": "/MSI-2020-Front-end-Development-Test/static/js/main.da55d192.chunk.js",
-    "main.js.map": "/MSI-2020-Front-end-Development-Test/static/js/main.da55d192.chunk.js.map",
+    "main.js": "/MSI-2020-Front-end-Development-Test/static/js/main.8277b0c7.chunk.js",
+    "main.js.map": "/MSI-2020-Front-end-Development-Test/static/js/main.8277b0c7.chunk.js.map",
     "runtime-main.js": "/MSI-2020-Front-end-Development-Test/static/js/runtime-main.c8d00197.js",
     "runtime-main.js.map": "/MSI-2020-Front-end-Development-Test/static/js/runtime-main.c8d00197.js.map",
-    "static/js/2.a4a43543.chunk.js": "/MSI-2020-Front-end-Development-Test/static/js/2.a4a43543.chunk.js",
-    "static/js/2.a4a43543.chunk.js.map": "/MSI-2020-Front-end-Development-Test/static/js/2.a4a43543.chunk.js.map",
+    "static/js/2.614facf9.chunk.js": "/MSI-2020-Front-end-Development-Test/static/js/2.614facf9.chunk.js",
+    "static/js/2.614facf9.chunk.js.map": "/MSI-2020-Front-end-Development-Test/static/js/2.614facf9.chunk.js.map",
     "index.html": "/MSI-2020-Front-end-Development-Test/index.html",
-    "precache-manifest.fdd95f4dfd401be125211a7c88561d92.js": "/MSI-2020-Front-end-Development-Test/precache-manifest.fdd95f4dfd401be125211a7c88561d92.js",
+    "precache-manifest.d37e26e5c380453cce225e796d99ea56.js": "/MSI-2020-Front-end-Development-Test/precache-manifest.d37e26e5c380453cce225e796d99ea56.js",
     "service-worker.js": "/MSI-2020-Front-end-Development-Test/service-worker.js",
     "static/css/main.7ffaeff8.chunk.css.map": "/MSI-2020-Front-end-Development-Test/static/css/main.7ffaeff8.chunk.css.map",
-    "static/js/2.a4a43543.chunk.js.LICENSE.txt": "/MSI-2020-Front-end-Development-Test/static/js/2.a4a43543.chunk.js.LICENSE.txt",
+    "static/js/2.614facf9.chunk.js.LICENSE.txt": "/MSI-2020-Front-end-Development-Test/static/js/2.614facf9.chunk.js.LICENSE.txt",
     "static/media/heart.679d6e7b.svg": "/MSI-2020-Front-end-Development-Test/static/media/heart.679d6e7b.svg",
     "static/media/link.f8a998d1.svg": "/MSI-2020-Front-end-Development-Test/static/media/link.f8a998d1.svg",
     "static/media/message.ee31211c.svg": "/MSI-2020-Front-end-Development-Test/static/media/message.ee31211c.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.c8d00197.js",
-    "static/js/2.a4a43543.chunk.js",
+    "static/js/2.614facf9.chunk.js",
     "static/css/main.7ffaeff8.chunk.css",
-    "static/js/main.da55d192.chunk.js"
+    "static/js/main.8277b0c7.chunk.js"
   ]
 }
