@@ -128,8 +128,7 @@ export const Joke = ({ item, isJokeFavorite = '', dispatch, small = '' }) => {
                 <HeartStyled
                     size={small}
                     favorite={isJokeFavorite}
-                    onClick={(e) => {
-                        e.preventDefault()
+                    onClick={() => {
                         delFromState(item)
                     }}
                 />
@@ -137,8 +136,7 @@ export const Joke = ({ item, isJokeFavorite = '', dispatch, small = '' }) => {
                 <HeartStyled
                     size={small}
                     favorite={isJokeFavorite}
-                    onClick={(e) => {
-                        e.preventDefault()
+                    onClick={() => {
                         addToState(item)
                     }}
                 />

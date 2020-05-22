@@ -52,7 +52,8 @@ export const FavList = ({ isFavOpen, favoriteJokes, dispatch }) => {
     return (
         <FavListWrapper open={isFavOpen}>
             <FavListBody>
-                <FavouriteTitle>{!isFavOpen ? 'Favourite' : ''}</FavouriteTitle>
+                <FavouriteTitle>{!isFavOpen && 'Favourite'}</FavouriteTitle>
+
                 {Object.keys(favoriteJokes).map((id) => {
                     return (
                         <Joke

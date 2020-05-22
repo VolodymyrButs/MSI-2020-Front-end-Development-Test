@@ -106,6 +106,9 @@ const TextInput = styled.input`
         color: #ababab;
     }
 `
+const GetJokeBlock = styled.div`
+    position: relative;
+`
 const GetJoke = styled.button`
     width: 152px;
     height: 42px;
@@ -118,12 +121,23 @@ const GetJoke = styled.button`
     font-weight: bold;
     font-size: 16px;
     line-height: 22px;
-    color: ${(props) => (props.color ? 'red' : '#f8f8f8')};
+    color: #f8f8f8;
     :focus {
         outline: none;
     }
 `
-
+const ErrorText = styled.p`
+    position: absolute;
+    top: 45px;
+    left: 0;
+    width: 152px;
+    height: 22px;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    color: #ffa28d;
+`
 const App = () => {
     const [joke, setJoke] = useState()
     const [selectedCategory, setSelectedCategory] = useState()
@@ -135,6 +149,7 @@ const App = () => {
     useEffect(() => {
         loadFavorite()
     }, [])
+
     const [favoriteJokes, dispatch] = useReducer(
         favoriteJokesReducer,
         loadFavorite()
@@ -162,12 +177,8 @@ const App = () => {
     const getTextJoke = () =>
         fetch(`https://api.chucknorris.io/jokes/search?query=${inputValue}`)
             .then((response) => response.json())
-            .then((data) => {
-                setJoke(data.result)
-            })
-            .catch((err) => {
-                console.log('lala', err.message)
-            })
+            .then((data) => shuffle(data.result))
+            .then((data) => setJoke(data))
 
     const handleInput = (e) => {
         setInputValue(e.target.value)
@@ -178,12 +189,12 @@ const App = () => {
             getCategoryJoke()
         } else if (radioValue === 'category' && !selectedCategory) {
             setWrongValue('Select category!')
-            setTimeout(() => setWrongValue(''), 3000)
+            setTimeout(() => setWrongValue(''), 2000)
         } else if (radioValue === 'text' && inputValue.length >= 3) {
             getTextJoke()
         } else if (radioValue === 'text' && inputValue.length < 3) {
             setWrongValue('Wrong value!')
-            setTimeout(() => setWrongValue(''), 3000)
+            setTimeout(() => setWrongValue(''), 2000)
         } else {
             getRandomJoke()
         }
@@ -250,14 +261,13 @@ const App = () => {
                                 ></TextInput>
                             </div>
                         )}
-
-                        <GetJoke onClick={getJoke} color={wrongValue}>
-                            {wrongValue ? `${wrongValue}` : 'Get a joke'}
-                        </GetJoke>
+                        <GetJokeBlock>
+                            <GetJoke onClick={getJoke}>Get a joke!</GetJoke>
+                            {wrongValue && <ErrorText>{wrongValue}</ErrorText>}
+                        </GetJokeBlock>
                     </JokeSelector>
                     {joke &&
                         joke.slice(0, 9).map((item) => {
-                            console.log(inputValue)
                             const isJokeFavorite = Boolean(
                                 favoriteJokes[item.id]
                             )
