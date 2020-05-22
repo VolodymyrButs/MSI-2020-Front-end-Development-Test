@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5c21324607788e16cf32ad9a46c48576",
+    "revision": "cccd663c2643943fff198f221a1f6c77",
     "url": "/MSI-2020-Front-end-Development-Test/index.html"
   },
   {
-    "revision": "e9f6d05e77602b85bb7c",
+    "revision": "6d340c32ea9206a09128",
     "url": "/MSI-2020-Front-end-Development-Test/static/css/main.7ffaeff8.chunk.css"
   },
   {
-    "revision": "6f913062d1fdb0bb3b38",
-    "url": "/MSI-2020-Front-end-Development-Test/static/js/2.614facf9.chunk.js"
+    "revision": "714d9844b2efe74b4ef1",
+    "url": "/MSI-2020-Front-end-Development-Test/static/js/2.85296aea.chunk.js"
   },
   {
     "revision": "c64c486544348f10a6d6c716950bc223",
-    "url": "/MSI-2020-Front-end-Development-Test/static/js/2.614facf9.chunk.js.LICENSE.txt"
+    "url": "/MSI-2020-Front-end-Development-Test/static/js/2.85296aea.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "e9f6d05e77602b85bb7c",
-    "url": "/MSI-2020-Front-end-Development-Test/static/js/main.8987ff4f.chunk.js"
+    "revision": "6d340c32ea9206a09128",
+    "url": "/MSI-2020-Front-end-Development-Test/static/js/main.2eca4af2.chunk.js"
   },
   {
-    "revision": "0004f1234e00295811fb",
-    "url": "/MSI-2020-Front-end-Development-Test/static/js/runtime-main.c8d00197.js"
+    "revision": "cdd7fd53e49d9a038752",
+    "url": "/MSI-2020-Front-end-Development-Test/static/js/runtime-main.6f68920c.js"
   },
   {
     "revision": "679d6e7b3815277a380faf01b75c0f03",
