@@ -30,7 +30,7 @@ const CategoriesButton = styled.button`
     ${(props) => isActive[props.active]}
 `
 
-export const Category = ({ selectedCategory, setSelectedCategory }) => {
+export const CategoryList = ({ selectedCategory, setSelectedCategory }) => {
     const [categoriesArray, setCategoriesArray] = useState([])
 
     useEffect(() => {

@@ -5,9 +5,9 @@ import { saveFavorite, loadFavorite } from './jokes/favoriteStorage'
 import { Joke } from './jokes/Joke'
 import { favoriteJokesReducer } from './jokes/favoriteJokesReducer'
 import { display } from './constant'
-import { Category } from './jokes/category'
-import { FavList } from './jokes/favList'
-import { ToggleFav } from './jokes/toggleFav'
+import { CategoryList } from './jokes/CategoryList'
+import { FavList } from './jokes/FavList'
+import { ToggleFav } from './jokes/ToggleFav'
 import { shuffle } from './shuffle'
 
 const Wrapper = styled.div`
@@ -139,7 +139,7 @@ const ErrorText = styled.p`
     color: #ffa28d;
 `
 const App = () => {
-    const [joke, setJoke] = useState()
+    const [jokes, setJokes] = useState()
     const [selectedCategory, setSelectedCategory] = useState()
     const [inputValue, setInputValue] = useState('')
     const [radioValue, setRadioValue] = useState()
@@ -162,7 +162,7 @@ const App = () => {
         fetch('https://api.chucknorris.io/jokes/random')
             .then((response) => response.json())
             .then((data) => {
-                setJoke([data])
+                setJokes([data])
             })
     const getCategoryJoke = () =>
         fetch(
@@ -170,15 +170,14 @@ const App = () => {
         )
             .then((response) => response.json())
             .then((data) => {
-                shuffle([data])
-                setJoke([data])
+                setJokes([data])
             })
 
     const getTextJoke = () =>
         fetch(`https://api.chucknorris.io/jokes/search?query=${inputValue}`)
             .then((response) => response.json())
             .then((data) => shuffle(data.result))
-            .then((data) => setJoke(data))
+            .then((data) => setJokes(data))
 
     const handleInput = (e) => {
         setInputValue(e.target.value)
@@ -201,8 +200,7 @@ const App = () => {
     }
 
     useEffect(() => {
-        isFavOpen && (document.body.style.overflow = 'hidden')
-        !isFavOpen && (document.body.style.overflow = 'unset')
+        document.body.style.overflow = isFavOpen ? 'hidden' : 'unset'
     }, [isFavOpen])
 
     return (
@@ -237,7 +235,7 @@ const App = () => {
                             From Categories
                         </RadioItem>
                         {radioValue === 'category' && (
-                            <Category
+                            <CategoryList
                                 selectedCategory={selectedCategory}
                                 setSelectedCategory={setSelectedCategory}
                             />
@@ -266,17 +264,14 @@ const App = () => {
                             {wrongValue && <ErrorText>{wrongValue}</ErrorText>}
                         </GetJokeBlock>
                     </JokeSelector>
-                    {joke &&
-                        joke.slice(0, 9).map((item) => {
+                    {jokes &&
+                        jokes.slice(0, 9).map((item) => {
                             const isJokeFavorite = Boolean(
                                 favoriteJokes[item.id]
                             )
-                                ? 'true'
-                                : ''
-
                             return (
                                 <Joke
-                                    small={''}
+                                    small={false}
                                     key={item.id}
                                     item={item}
                                     isJokeFavorite={isJokeFavorite}

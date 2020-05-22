@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { display } from '../constant'
-import { FavouriteTitle } from './favList'
+import { FavouriteTitle } from './FavList'
 
 const FavButton = styled.button`
     height: 28px;

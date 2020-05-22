@@ -9,37 +9,37 @@ import { display } from '../constant'
 const JokeWrapper = styled.div`
     position: relative;
     width: 100%;
-    background-color: ${(props) => (props.size ? 'white' : '#f8f8f8')};
+    background-color: ${(props) => (props.$size ? 'white' : '#f8f8f8')};
     border-radius: 20px;
     box-sizing: border-box;
     padding: ${(props) =>
-        props.size ? '47px 20px 20px 80px' : '67px 40px 45px 100px'};
+        props.$size ? '47px 20px 20px 80px' : '67px 40px 45px 100px'};
     margin: 10px 0px;
     @media (max-width: ${display.mobile}px) {
         padding: ${(props) =>
-            props.size ? '47px 20px 20px 60px' : '67px 40px 45px 80px'};
+            props.$size ? '47px 20px 20px 60px' : '67px 40px 45px 80px'};
     }
 `
 
 const HeartStyled = styled(Heart)`
     position: absolute;
-    right: ${(props) => (props.size ? '20px' : '40px')};
-    top: ${(props) => (props.size ? '20px' : '40px')};
+    right: ${(props) => (props.$size ? '20px' : '40px')};
+    top: ${(props) => (props.$size ? '20px' : '40px')};
     width: 22px;
     height: 20px;
-    fill: ${(props) => (props.favorite ? '#ff6767' : '#f8f8f8')};
+    fill: ${(props) => (props.$isJokeFavorite ? '#ff6767' : '#f8f8f8')};
 `
 const MessageIconWrapper = styled.div`
     position: absolute;
-    left: ${(props) => (props.size ? '20px' : '40px')};
-    top: ${(props) => (props.size ? '47px' : '67px')};
+    left: ${(props) => (props.$size ? '20px' : '40px')};
+    top: ${(props) => (props.$size ? '47px' : '67px')};
     @media (max-width: ${display.mobile}px) {
-        left: ${(props) => (props.size ? '10px' : '20px')};
+        left: ${(props) => (props.$size ? '10px' : '20px')};
     }
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: ${(props) => (props.size ? ' #f8f8f8' : '#fff')};
+    background-color: ${(props) => (props.$size ? ' #f8f8f8' : '#fff')};
 `
 
 const MessageIcon = styled(Message)`
@@ -96,7 +96,12 @@ const JokeId = styled.div`
 const LinkStyled = styled(Link)`
     margin-left: 5px;
 `
-export const Joke = ({ item, isJokeFavorite = '', dispatch, small = '' }) => {
+export const Joke = ({
+    item,
+    isJokeFavorite = false,
+    dispatch,
+    small = false,
+}) => {
     const delFromState = (item) => {
         dispatch({ type: 'DEL_FAV', item })
     }
@@ -104,7 +109,7 @@ export const Joke = ({ item, isJokeFavorite = '', dispatch, small = '' }) => {
         dispatch({ type: 'ADD_FAV', item })
     }
     return (
-        <JokeWrapper size={small}>
+        <JokeWrapper $size={small}>
             <JokeId>
                 ID:
                 <a href={item.url} target="blank">
@@ -124,24 +129,14 @@ export const Joke = ({ item, isJokeFavorite = '', dispatch, small = '' }) => {
                     <JokeCategory>{item.categories}</JokeCategory>
                 )}
             </BottomContainer>
-            {isJokeFavorite === 'true' ? (
-                <HeartStyled
-                    size={small}
-                    favorite={isJokeFavorite}
-                    onClick={() => {
-                        delFromState(item)
-                    }}
-                />
-            ) : (
-                <HeartStyled
-                    size={small}
-                    favorite={isJokeFavorite}
-                    onClick={() => {
-                        addToState(item)
-                    }}
-                />
-            )}
-            <MessageIconWrapper size={small}>
+            <HeartStyled
+                $size={small}
+                $isJokeFavorite={isJokeFavorite}
+                onClick={() => {
+                    isJokeFavorite ? delFromState(item) : addToState(item)
+                }}
+            />
+            <MessageIconWrapper $size={small}>
                 <MessageIcon />
             </MessageIconWrapper>
         </JokeWrapper>

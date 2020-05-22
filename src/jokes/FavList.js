@@ -57,10 +57,10 @@ export const FavList = ({ isFavOpen, favoriteJokes, dispatch }) => {
                 {Object.keys(favoriteJokes).map((id) => {
                     return (
                         <Joke
-                            small={'true'}
+                            small={true}
                             key={favoriteJokes[id].id}
                             item={favoriteJokes[id]}
-                            isJokeFavorite={'true'}
+                            isJokeFavorite={true}
                             dispatch={dispatch}
                         />
                     )
