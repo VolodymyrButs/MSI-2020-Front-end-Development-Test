@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/MSI-2020-Front-end-Development-Test/static/css/main.7ffaeff8.chunk.css",
-    "main.js": "/MSI-2020-Front-end-Development-Test/static/js/main.2eca4af2.chunk.js",
-    "main.js.map": "/MSI-2020-Front-end-Development-Test/static/js/main.2eca4af2.chunk.js.map",
+    "main.js": "/MSI-2020-Front-end-Development-Test/static/js/main.ef4a54e5.chunk.js",
+    "main.js.map": "/MSI-2020-Front-end-Development-Test/static/js/main.ef4a54e5.chunk.js.map",
     "runtime-main.js": "/MSI-2020-Front-end-Development-Test/static/js/runtime-main.6f68920c.js",
     "runtime-main.js.map": "/MSI-2020-Front-end-Development-Test/static/js/runtime-main.6f68920c.js.map",
     "static/js/2.85296aea.chunk.js": "/MSI-2020-Front-end-Development-Test/static/js/2.85296aea.chunk.js",
     "static/js/2.85296aea.chunk.js.map": "/MSI-2020-Front-end-Development-Test/static/js/2.85296aea.chunk.js.map",
     "index.html": "/MSI-2020-Front-end-Development-Test/index.html",
-    "precache-manifest.be38f850ffafcd0c8b56d0b65e6202c3.js": "/MSI-2020-Front-end-Development-Test/precache-manifest.be38f850ffafcd0c8b56d0b65e6202c3.js",
+    "precache-manifest.1667f36b0d875069d7941805e4e8972a.js": "/MSI-2020-Front-end-Development-Test/precache-manifest.1667f36b0d875069d7941805e4e8972a.js",
     "service-worker.js": "/MSI-2020-Front-end-Development-Test/service-worker.js",
     "static/css/main.7ffaeff8.chunk.css.map": "/MSI-2020-Front-end-Development-Test/static/css/main.7ffaeff8.chunk.css.map",
     "static/js/2.85296aea.chunk.js.LICENSE.txt": "/MSI-2020-Front-end-Development-Test/static/js/2.85296aea.chunk.js.LICENSE.txt",
@@ -20,6 +20,6 @@
     "static/js/runtime-main.6f68920c.js",
     "static/js/2.85296aea.chunk.js",
     "static/css/main.7ffaeff8.chunk.css",
-    "static/js/main.2eca4af2.chunk.js"
+    "static/js/main.ef4a54e5.chunk.js"
   ]
 }
